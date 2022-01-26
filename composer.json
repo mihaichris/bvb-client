@@ -1,0 +1,29 @@
+{
+    "name": "mihai/bvb-client",
+    "description": "Bucharest Stock Exchange API Client",
+    "type": "library",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.6",
+        "phpstan/phpstan": "^1.4",
+        "infection/infection": "^0.26.2"
+    },
+    "license": "MIT License",
+    "autoload": {
+        "psr-4": {
+            "BVB\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mihai",
+            "email": "48624094+mihaichris@users.noreply.github.com"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
+    }
+}
