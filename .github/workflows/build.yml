@@ -61,18 +61,7 @@ jobs:
 
   unit-tests:
     name: "Unit tests"
-    runs-on: ${{ matrix.operating-system }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        php-version:
-          - "8.1.1"
-        operating-system:
-          - "ubuntu-latest"
-        dependencies:
-          - "lowest"
-          - "highest"
+    runs-on: "ubuntu-latest"
 
     steps:
       - name: "Checkout repository"
@@ -122,18 +111,7 @@ jobs:
   mutation-tests:
     name: "Mutation tests"
     needs: ["unit-tests"]
-    runs-on: ${{ matrix.operating-system }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        php-version:
-          - "8.1.1"
-        operating-system:
-          - "ubuntu-latest"
-        dependencies:
-          - "lowest"
-          - "highest"
+    runs-on: "ubuntu-latest"
 
     steps:
       - name: "Checkout repository"
