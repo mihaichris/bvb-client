@@ -1,0 +1,138 @@
+name: "build"
+
+on:
+  pull_request:
+    branches:
+      - "main"
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  COMPOSER_ROOT_VERSION: "2.2.3"
+
+jobs:
+  coding-standards:
+    name: "Coding standards"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "8.1.1"
+          coverage: "none"
+
+      - name: "Install dependencies (Composer)"
+        uses: "ramsey/composer-install@v2"
+
+      - name: "Check coding standards (PHP_CodeSniffer)"
+        shell: "bash"
+        run: "./vendor/bin/phpcs ./src/ --standard=PSR12"
+
+  static-analysis:
+    name: "Static analysis"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "8.1.1"
+          coverage: "none"
+
+      - name: "Install dependencies (Composer)"
+        uses: "ramsey/composer-install@v2"
+
+      - name: "Statically analyze code (PHPStan)"
+        shell: "bash"
+        run: "./vendor/bin/phpstan analyze ./src/"
+
+      - name: "Statically analyze code (Psalm)"
+        shell: "bash"
+        run: "./vendor/bin/psalm"
+
+  unit-tests:
+    name: "Unit tests"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "8.1.1"
+          coverage: "none"
+
+      - name: "Install dependencies (Composer)"
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+          composer-options: "${{ matrix.composer-options }}"
+
+      - name: "Run unit tests"
+        shell: "bash"
+        run: "./vendor/bin/phpunit --testsuite=Unit"
+
+      - name: "Run features tests"
+        shell: "bash"
+        run: "./vendor/bin/phpunit --testsuite=Features"
+
+  # code-coverage:
+  #   name: "Code coverage"
+  #   needs: ["unit-tests", "coding-standards", "static-analysis"]
+  #   runs-on: "ubuntu-latest"
+  #   steps:
+  #     - name: "Checkout repository"
+  #       uses: "actions/checkout@v2"
+
+  #     - name: "Install PHP"
+  #       uses: "shivammathur/setup-php@v2"
+  #       with:
+  #         php-version: "8.1.1"
+  #         coverage: "pcov"
+  #         ini-values: "memory_limit=-1"
+
+  #     - name: "Install dependencies (Composer)"
+  #       uses: "ramsey/composer-install@v2"
+
+  #     - name: "Run unit tests (PHPUnit)"
+  #       shell: "bash"
+  #       run: "composer dev:test:coverage:ci"
+
+  #     - name: "Publish coverage report to Codecov"
+  #       uses: "codecov/codecov-action@v2.1.0"
+
+  mutation-tests:
+    name: "Mutation tests"
+    needs: ["unit-tests"]
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "8.1.1"
+          coverage: "xdebug"
+
+      - name: "Install dependencies (Composer)"
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+          composer-options: "${{ matrix.composer-options }}"
+
+      - name: "Run mutation tests (Infection)"
+        shell: "bash"
+        run: "./vendor/bin/infection"

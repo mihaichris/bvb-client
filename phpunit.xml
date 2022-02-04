@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd" stopOnFailure="false" convertWarningsToExceptions="true" convertNoticesToExceptions="true" convertErrorsToExceptions="true" bootstrap="vendor/autoload.php" executionOrder="depends,defects" forceCoversAnnotation="true" beStrictAboutCoversAnnotation="true" beStrictAboutOutputDuringTests="true" beStrictAboutTodoAnnotatedTests="true" colors="true" verbose="true">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd" stopOnFailure="false" bootstrap="vendor/autoload.php" colors="true" verbose="true">
     <testsuites>
         <testsuite name="Unit">
-            <directory suffix="Test.php">tests/Unit/</directory>
+            <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
         <testsuite name="Features">
-            <directory suffix="Test.php">tests/Features/</directory>
+            <directory suffix="Test.php">./tests/Features</directory>
         </testsuite>
     </testsuites>
 
