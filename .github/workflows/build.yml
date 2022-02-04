@@ -70,7 +70,7 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "${{ matrix.php-version }}"
+          php-version: "8.1.1"
           coverage: "none"
 
       - name: "Install dependencies (Composer)"
@@ -120,8 +120,8 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "${{ matrix.php-version }}"
-          coverage: "xdebug"
+          php-version: "8.1.1"
+          coverage: "none"
 
       - name: "Install dependencies (Composer)"
         uses: "ramsey/composer-install@v2"
