@@ -59,32 +59,6 @@ jobs:
         shell: "bash"
         run: "./vendor/bin/psalm"
 
-  security-analysis:
-    name: "Security analysis"
-    needs: ["coding-standards", "static-analysis"]
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: "Checkout repository"
-        uses: "actions/checkout@v2"
-
-      - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
-        with:
-          php-version: "8.1.1"
-          coverage: "none"
-
-      - name: "Install dependencies (Composer)"
-        uses: "ramsey/composer-install@v2"
-
-      - name: "Analyze security of code (Psalm)"
-        shell: "bash"
-        run: "./vendor/bin/psalm --taint-analysis --report=build/logs/psalm.sarif"
-
-      - name: "Upload security analysis results to GitHub"
-        uses: "github/codeql-action/upload-sarif@v1"
-        with:
-          sarif_file: "build/logs/psalm.sarif"
-
   unit-tests:
     name: "Unit tests"
     needs: ["security-analysis"]
@@ -94,7 +68,7 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "8.1"
+          - "8.1.1"
         operating-system:
           - "macos-latest"
           - "ubuntu-latest"
@@ -153,3 +127,47 @@ jobs:
 
   #     - name: "Publish coverage report to Codecov"
   #       uses: "codecov/codecov-action@v2.1.0"
+
+  mutation-tests:
+    name: "Mutation tests"
+    needs: ["unit-tests"]
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "8.1.1"
+        operating-system:
+          - "macos-latest"
+          - "ubuntu-latest"
+          - "windows-latest"
+        dependencies:
+          - "lowest"
+          - "highest"
+
+    steps:
+      - name: "Configure Git (for Windows)"
+        if: ${{ matrix.operating-system == 'windows-latest' }}
+        shell: "bash"
+        run: |
+          git config --system core.autocrlf false
+          git config --system core.eol lf
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php-version }}"
+          coverage: "xdebug"
+
+      - name: "Install dependencies (Composer)"
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+          composer-options: "${{ matrix.composer-options }}"
+
+      - name: "Run mutation tests (Infection)"
+        shell: "bash"
+        run: "./vendor/bin/infection"
