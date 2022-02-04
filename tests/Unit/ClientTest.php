@@ -4,9 +4,6 @@ namespace BVB;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers Client
- */
 class ClientTest extends TestCase
 {
     private Client $client;

@@ -6,9 +6,6 @@ use DI\Container;
 use BVB\ClientConfigTrait;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers ClientConfigTrait
- */
 class ClientConfigTraitTest extends TestCase
 {
     use ClientConfigTrait {
