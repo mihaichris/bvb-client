@@ -33,7 +33,7 @@ jobs:
 
       - name: "Check coding standards (PHP_CodeSniffer)"
         shell: "bash"
-        run: "/vendor/bin/phpcs ./src/ --standard=PSR12"
+        run: "./vendor/bin/phpcs ./src/ --standard=PSR12"
 
   static-analysis:
     name: "Static analysis"
