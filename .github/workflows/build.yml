@@ -79,9 +79,13 @@ jobs:
           dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "${{ matrix.composer-options }}"
 
-      - name: "Run unit tests (PHPUnit)"
+      - name: "Run unit tests"
         shell: "bash"
-        run: "./vendor/bin/phpunit"
+        run: "./vendor/bin/phpunit --testsuite=Unit"
+
+      - name: "Run features tests"
+        shell: "bash"
+        run: "./vendor/bin/phpunit --testsuite=Features"
 
   # code-coverage:
   #   name: "Code coverage"
