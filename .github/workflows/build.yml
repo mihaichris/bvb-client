@@ -61,7 +61,6 @@ jobs:
 
   unit-tests:
     name: "Unit tests"
-    needs: ["security-analysis"]
     runs-on: ${{ matrix.operating-system }}
 
     strategy:
