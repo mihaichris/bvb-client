@@ -69,20 +69,12 @@ jobs:
         php-version:
           - "8.1.1"
         operating-system:
-          - "macos-latest"
           - "ubuntu-latest"
-          - "windows-latest"
         dependencies:
           - "lowest"
           - "highest"
 
     steps:
-      - name: "Configure Git (for Windows)"
-        if: ${{ matrix.operating-system == 'windows-latest' }}
-        shell: "bash"
-        run: |
-          git config --system core.autocrlf false
-          git config --system core.eol lf
       - name: "Checkout repository"
         uses: "actions/checkout@v2"
 
@@ -138,20 +130,12 @@ jobs:
         php-version:
           - "8.1.1"
         operating-system:
-          - "macos-latest"
           - "ubuntu-latest"
-          - "windows-latest"
         dependencies:
           - "lowest"
           - "highest"
 
     steps:
-      - name: "Configure Git (for Windows)"
-        if: ${{ matrix.operating-system == 'windows-latest' }}
-        shell: "bash"
-        run: |
-          git config --system core.autocrlf false
-          git config --system core.eol lf
       - name: "Checkout repository"
         uses: "actions/checkout@v2"
 
