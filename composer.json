@@ -3,7 +3,11 @@
     "description": "Bucharest Stock Exchange API Client",
     "type": "library",
     "require": {
-        "php-di/php-di": "^6.3"
+        "php-di/php-di": "^6.3",
+        "symfony/http-client": "^6.0",
+        "symfony/dom-crawler": "^6.0",
+        "symfony/css-selector": "^6.0",
+        "nesbot/carbon": "^2.56"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
@@ -19,6 +23,14 @@
         ],
         "psr-4": {
             "BVB\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ],
+        "psr-4": {
+            "BVB\\Tests\\": "tests/"
         }
     },
     "authors": [

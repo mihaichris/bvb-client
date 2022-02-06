@@ -1,13 +1,12 @@
 <?php
 
-namespace BVB;
+namespace BVB\Tests\Features;
 
-use PHPUnit\Framework\TestCase;
-
-class ConnectToBVBWebsiteTest extends TestCase
+class ConnectToBVBWebsiteTest extends BaseTestCase
 {
     public function testAccesingBVBWebsite()
     {
-        $this->assertTrue(true);
+        $response = $this->get('https://bvb.ro');
+        $this->assertTrue(200 === $response->getStatusCode());
     }
 }

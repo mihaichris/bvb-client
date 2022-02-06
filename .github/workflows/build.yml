@@ -87,30 +87,32 @@ jobs:
         shell: "bash"
         run: "./vendor/bin/phpunit --testsuite=Features"
 
-  # code-coverage:
-  #   name: "Code coverage"
-  #   needs: ["unit-tests", "coding-standards", "static-analysis"]
-  #   runs-on: "ubuntu-latest"
-  #   steps:
-  #     - name: "Checkout repository"
-  #       uses: "actions/checkout@v2"
+  code-coverage:
+    name: "Code coverage"
+    needs: ["unit-tests", "coding-standards", "static-analysis"]
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
 
-  #     - name: "Install PHP"
-  #       uses: "shivammathur/setup-php@v2"
-  #       with:
-  #         php-version: "8.1.1"
-  #         coverage: "pcov"
-  #         ini-values: "memory_limit=-1"
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "8.1.1"
+          coverage: "xdebug"
+          ini-values: "memory_limit=-1"
 
-  #     - name: "Install dependencies (Composer)"
-  #       uses: "ramsey/composer-install@v2"
+      - name: "Install dependencies (Composer)"
+        uses: "ramsey/composer-install@v2"
 
-  #     - name: "Run unit tests (PHPUnit)"
-  #       shell: "bash"
-  #       run: "composer dev:test:coverage:ci"
+      - name: "Run unit tests (PHPUnit)"
+        shell: "bash"
+        run: "./vendor/bin/phpunit --coverage-html build/coverage"
 
-  #     - name: "Publish coverage report to Codecov"
-  #       uses: "codecov/codecov-action@v2.1.0"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: build/coverage
 
   mutation-tests:
     name: "Mutation tests"
