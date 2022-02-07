@@ -81,11 +81,11 @@ jobs:
 
       - name: "Run unit tests"
         shell: "bash"
-        run: "./vendor/bin/phpunit --testsuite=Unit"
+        run: "./vendor/bin/pest --testsuite=Unit"
 
       - name: "Run features tests"
         shell: "bash"
-        run: "./vendor/bin/phpunit --testsuite=Features"
+        run: "./vendor/bin/pest --testsuite=Feature"
 
   code-coverage:
     name: "Code coverage"
@@ -137,4 +137,4 @@ jobs:
 
       - name: "Run mutation tests (Infection)"
         shell: "bash"
-        run: "./vendor/bin/infection"
+        run: "XDEBUG_MODE=coverage ./vendor/bin/infection --test-framework=pest --show-mutations"

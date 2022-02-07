@@ -4,57 +4,44 @@ namespace BVB\Tests\Unit;
 
 use BVB\Client;
 use BVB\Infrastructure\Ticker\BVBTicker;
-use PHPUnit\Framework\TestCase;
 
-class ClientTest extends TestCase
-{
-    private Client $client;
+beforeEach(function () {
+    $this->client = new Client();
+});
 
-    protected function setUp(): void
-    {
-        parent::__construct();
-        $this->client = new Client();
-    }
+test('client is not null', function () {
+    $this->assertNotNull($this->client);
+})->group('integration');
 
-    public function test_get_client_is_not_null()
-    {
-        $this->assertNotNull($this->client);
-    }
+test('client is client instance', function () {
+    $this->assertInstanceOf(Client::class, $this->client);
+})->group('integration');
 
-    public function test_get_client_is_client()
-    {
-        $this->assertInstanceOf(Client::class, $this->client);
-    }
+test('get ticker without parameter will get error', function () {
+    $this->client->getTicker();
+})->group('integration')->expectError();
 
-    public function test_get_ticker_without_parameter_will_return_excetion()
-    {
-        $this->expectError();
-        $ticker = $this->client->getTicker();
-    }
+test('ticker is not null when i give a ticker parameter', function (string $ticker) {
+    $this->assertNotNull($this->client->getTicker($ticker));
+})->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
 
-    public function test_get_ticker_is_not_null()
-    {
-        $ticker = $this->client->getTicker('TRP');
-        $this->assertNotNull($ticker);
-    }
+test('ticker is bvb ticker instance when i give a ticker parameter', function (string $ticker) {
+    $this->assertInstanceOf(BVBTicker::class, $this->client->getTicker($ticker));
+})->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
 
-    public function test_get_ticker_is_bvb_ticker()
-    {
-        $ticker = $this->client->getTicker('TRP');
-        $this->assertInstanceOf(BVBTicker::class, $ticker);
-    }
+it('should throw exception if ticker could provided could not be found', function () {
+    $ticker = $this->client->getTicker('TEST');
+    $ticker->getPrice();
+})->group('integration')->expectExceptionMessage("Ticker not found");
 
-    public function test_get_ticker_price_is_not_null()
-    {
-        $ticker = $this->client->getTicker('TRP');
-        $price = $ticker->getPrice();
-        $this->assertNotNull($price);
-    }
+test('ticker price is not null', function (string $ticker) {
+    $ticker = $this->client->getTicker($ticker);
+    $price = $ticker->getPrice();
+    $this->assertNotNull($price);
+})->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
 
-    public function test_get_ticker_price_is_float()
-    {
-        $ticker = $this->client->getTicker('TRP');
-        $price = $ticker->getPrice();
-        $this->assertIsFloat($price);
-    }
-}
+test('ticker price is float', function (string $ticker) {
+    $ticker = $this->client->getTicker($ticker);
+    $price = $ticker->getPrice();
+    $this->assertIsFloat($price);
+})->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
