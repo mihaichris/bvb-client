@@ -1,29 +1,51 @@
 <?php
 
+use BVB\Domain\Ticker\TickerInfo;
+use Pest\Mock\Mock;
+use BVB\Domain\Ticker\TickerRepository;
 use BVB\Infrastructure\Ticker\BVBTicker;
-use BVB\Infrastructure\Ticker\TickerHistoryRepository;
+
+beforeEach(function () {
+    $this->tickerRepository = mock(TickerRepository::class);
+});
 
 it('should be an instance of BVBTicker', function () {
-    /** @var TickerHistoryRepository $historyRepository */
-    $historyRepository = Mockery::mock(TickerHistoryRepository::class);
-    $ticker = new BVBTicker('TRP', $historyRepository);
+    /** @var Mock $tickerRepository */
+    $tickerRepository = $this->tickerRepository;
+    /** @var Mock $tickerInfo */
+    $tickerInfo = mock(TickerInfo::class);
+    $tickerRepository = $tickerRepository->expect(
+        getTickerInfo: fn () => $tickerInfo->expect()
+    );
+    /** @var TickerRepository $tickerRepository */
+    $ticker = new BVBTicker('TRP', $tickerRepository);
     $this->assertInstanceOf(BVBTicker::class, $ticker);
 })->group('infrastructure');
 
 test('ticker price is not null', function () {
-    /** @var TickerHistoryRepository $historyRepository */
-    $historyRepository = mock(TickerHistoryRepository::class)->expect(
-        getLastClosed: fn () => 1.0
+    /** @var Mock $tickerRepository */
+    $tickerRepository = $this->tickerRepository;
+    /** @var Mock $tickerInfo */
+    $tickerInfo = mock(TickerInfo::class);
+    $tickerRepository = $tickerRepository->expect(
+        getLastClosed: fn () => 1.0,
+        getTickerInfo: fn () => $tickerInfo->expect()
     );
-    $ticker = new BVBTicker('TRP', $historyRepository);
+    /** @var TickerRepository $tickerRepository */
+    $ticker = new BVBTicker('TRP', $tickerRepository);
     $this->assertNotNull($ticker->getPrice());
 })->group('infrastructure');
 
 test('ticker price is float', function () {
-    /** @var TickerHistoryRepository $historyRepository */
-    $historyRepository = mock(TickerHistoryRepository::class)->expect(
-        getLastClosed: fn () => 1.0
+    /** @var Mock $tickerRepository */
+    $tickerRepository = $this->tickerRepository;
+    /** @var Mock $tickerInfo */
+    $tickerInfo = mock(TickerInfo::class);
+    $tickerRepository = $tickerRepository->expect(
+        getLastClosed: fn () => 1.0,
+        getTickerInfo: fn () => $tickerInfo->expect()
     );
-    $ticker = new BVBTicker('TRP', $historyRepository);
+    /** @var TickerRepository $tickerRepository */
+    $ticker = new BVBTicker('TRP', $tickerRepository);
     $this->assertIsFloat($ticker->getPrice());
 })->group('infrastructure');

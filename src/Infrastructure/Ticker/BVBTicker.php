@@ -2,28 +2,42 @@
 
 namespace BVB\Infrastructure\Ticker;
 
+use Exception;
 use BVB\Domain\Ticker\Ticker;
 use BVB\Domain\Ticker\TickerInfo;
-use BVB\Infrastructure\Ticker\TickerHistoryRepository;
+use BVB\Domain\Ticker\TickerRepository;
 
 class BVBTicker implements Ticker
 {
-    private TickerHistoryRepository $historyRepository;
+    private TickerRepository $tickerRepository;
     private string $ticker;
 
-    public function __construct(string $ticker, TickerHistoryRepository $historyRepository)
+    public function __construct(string $ticker, TickerRepository $tickerRepository)
     {
         $this->ticker = $ticker;
-        $this->historyRepository = $historyRepository;
+        $this->tickerRepository = $tickerRepository;
+        if (false === $this->exists()) {
+            throw new Exception('Ticker not found on Bucharest Stock Exchange');
+        }
     }
 
     public function getPrice(): float
     {
-        return $this->historyRepository->getLastClosed($this->ticker);
+        return $this->tickerRepository->getLastClosed($this->ticker);
     }
 
     public function getInfo(): TickerInfo
     {
-        return new TickerInfo();
+        return $this->tickerRepository->getTickerInfo($this->ticker);
+    }
+
+    private function exists(): bool
+    {
+        try {
+            $this->getInfo();
+        } catch (Exception $exception) {
+            return false;
+        }
+        return true;
     }
 }

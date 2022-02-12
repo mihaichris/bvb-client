@@ -13,6 +13,10 @@ return [
         return $container->get('bvb.api.baseUrl') .
             '/api/history?symbol=%s&dt=INTRA&p=intraday_1&ajust=1&from=%d&to=%d';
     },
+    'bvb.api.ticker.symbolUrl' => function (Container $container) {
+        return $container->get('bvb.api.baseUrl') .
+            '/api/symbols?symbol=%s';
+    },
     'http.client.defaultParameters' => function (Container $container) {
         return ['headers' => ['Referer' => $container->get('bvb.baseUrl')]];
     },

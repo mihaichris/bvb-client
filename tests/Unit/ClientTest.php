@@ -30,18 +30,24 @@ test('ticker is bvb ticker instance when i give a ticker parameter', function (s
 })->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
 
 it('should throw exception if ticker could provided could not be found', function () {
-    $ticker = $this->client->getTicker('TEST');
+    /** @var Client $client */
+    $client = $this->client;
+    $ticker = $client->getTicker('TEST');
     $ticker->getPrice();
 })->group('integration')->expectExceptionMessage("Ticker not found");
 
 test('ticker price is not null', function (string $ticker) {
-    $ticker = $this->client->getTicker($ticker);
+    /** @var Client $client */
+    $client = $this->client;
+    $ticker = $client->getTicker($ticker);
     $price = $ticker->getPrice();
     $this->assertNotNull($price);
 })->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
 
 test('ticker price is float', function (string $ticker) {
-    $ticker = $this->client->getTicker($ticker);
+    /** @var Client $client */
+    $client = $this->client;
+    $ticker = $client->getTicker($ticker);
     $price = $ticker->getPrice();
     $this->assertIsFloat($price);
 })->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');

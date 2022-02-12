@@ -3,19 +3,18 @@
 namespace BVB\Domain\Ticker;
 
 use BVB\Infrastructure\Ticker\BVBTicker;
-use BVB\Infrastructure\Ticker\TickerHistoryRepository;
 
 class TickerFactory
 {
-    private TickerHistoryRepository $historyRepository;
+    private TickerRepository $tickerRepository;
 
-    public function __construct(TickerHistoryRepository $historyRepository)
+    public function __construct(TickerRepository $tickerRepository)
     {
-        $this->historyRepository = $historyRepository;
+        $this->tickerRepository = $tickerRepository;
     }
 
     public function create(string $ticker): Ticker
     {
-        return new BVBTicker($ticker, $this->historyRepository);
+        return new BVBTicker($ticker, $this->tickerRepository);
     }
 }

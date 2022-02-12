@@ -107,7 +107,7 @@ jobs:
 
       - name: "Run unit tests (PHPUnit)"
         shell: "bash"
-        run: "./vendor/bin/phpunit --coverage-html build/coverage"
+        run: "./vendor/bin/pest --coverage-html build/coverage"
 
       - uses: actions/upload-artifact@v2
         with:

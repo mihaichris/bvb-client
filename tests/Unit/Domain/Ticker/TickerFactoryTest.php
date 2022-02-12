@@ -1,15 +1,24 @@
 <?php
 
+use BVB\Domain\Ticker\Ticker;
 use BVB\Domain\Ticker\TickerFactory;
-use BVB\Infrastructure\Ticker\BVBTicker;
-use BVB\Infrastructure\Ticker\TickerHistoryRepository;
+use BVB\Domain\Ticker\TickerInfo;
+use BVB\Domain\Ticker\TickerRepository;
 
 beforeEach(function () {
-    $this->historyRepository = Mockery::mock(TickerHistoryRepository::class);
-    $this->factory = new TickerFactory($this->historyRepository);
+    /** @var Mock $tickerRepository */
+    $tickerRepository = mock(TickerRepository::class);
+    $this->tickerInfo = mock(TickerInfo::class);
+    $tickerRepository = $tickerRepository->expect(
+        getTickerInfo: fn () => $this->tickerInfo->expect()
+    );
+    /** @var TickerRepository $tickerRepository */
+    $this->factory = new TickerFactory($tickerRepository);
 });
 
 it("should create a ticker class", function (string $ticker) {
-    $ticker = $this->factory->create($ticker);
-    $this->assertInstanceOf(BVBTicker::class, $ticker);
+    /** @var TickerFactory $factory */
+    $factory = $this->factory;
+    $ticker = $factory->create($ticker);
+    expect($ticker)->toBeInstanceOf(Ticker::class);
 })->with(['TRP', 'IMP', 'ALR']);
