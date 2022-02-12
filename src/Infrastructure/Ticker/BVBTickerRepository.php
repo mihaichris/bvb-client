@@ -54,8 +54,11 @@ class BVBTickerRepository implements TickerRepository
         return json_decode($response->getContent(), true);
     }
 
-    private function buildTickerHistoryUrl(string $ticker, float|string|int $unixStartDate, float|string|int $unixEndDate): string
-    {
+    private function buildTickerHistoryUrl(
+        string $ticker,
+        float|string|int $unixStartDate,
+        float|string|int $unixEndDate
+    ): string {
         return sprintf(self::$tickerHistoryUrl, $ticker, $unixStartDate, $unixEndDate);
     }
 

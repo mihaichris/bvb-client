@@ -16,5 +16,7 @@ mutation-test:
 static-analysis:
 	@echo "Running PHP Stan"
 	./vendor/bin/phpstan analyze ./src/
+	@echo "Running PHP CodeSniffer"
+	./vendor/bin/phpcs --standard=PSR12 ./src/
 	@echo "Running Psalm"
 	./vendor/bin/psalm
