@@ -1,8 +1,0 @@
-[user]
-	name = Mihai-Cristian Fagadau
-	email = 48624094+mihaichris@users.noreply.github.com
-	signingkey = 786F18F150CA7F0E
-[gpg]
-	program = "C:\Program Files (x86)\GnuPG\bin\gpg.exe"
-[commit]
-	gpgsign = true
