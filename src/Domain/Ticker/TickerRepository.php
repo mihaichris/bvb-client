@@ -2,6 +2,7 @@
 
 namespace BVB\Domain\Ticker;
 
+use ArrayObject;
 use Exception;
 
 interface TickerRepository

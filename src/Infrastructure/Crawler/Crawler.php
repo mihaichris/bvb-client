@@ -18,7 +18,7 @@ class Crawler
         $this->client = $client;
     }
 
-    public function crawl(string $website)
+    public function crawl(string $website): SymfonyCrawler
     {
         $response = $this->findWebSite($website);
         $this->crawler = new SymfonyCrawler($response->getContent());

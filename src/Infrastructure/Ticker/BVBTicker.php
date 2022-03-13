@@ -2,6 +2,7 @@
 
 namespace BVB\Infrastructure\Ticker;
 
+use ArrayObject;
 use Exception;
 use BVB\Domain\Ticker\Ticker;
 use BVB\Domain\Ticker\TickerInfo;

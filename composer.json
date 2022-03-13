@@ -13,7 +13,7 @@
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.6",
         "phpstan/phpstan": "^1.4",
-        "infection/infection": "^0.26.2",
+        "infection/infection": "^0.26.6",
         "vimeo/psalm": "^4.19",
         "symfony/var-dumper": "^6.0",
         "pestphp/pest": "^1.21",

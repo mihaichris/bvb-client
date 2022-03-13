@@ -3,6 +3,7 @@
 namespace BVB\Tests\Unit;
 
 use BVB\Client;
+use BVB\Domain\Ticker\TickerInfo;
 use BVB\Infrastructure\Ticker\BVBTicker;
 
 beforeEach(function () {
@@ -50,4 +51,18 @@ test('ticker price is float', function (string $ticker) {
     $ticker = $client->getTicker($ticker);
     $price = $ticker->getPrice();
     $this->assertIsFloat($price);
+})->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
+
+test('get only ticker price', function (string $ticker) {
+    /** @var Client $client */
+    $client = $this->client;
+    $price = $client->getTickerPrice($ticker);
+    $this->assertIsFloat($price);
+})->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
+
+test('get only ticker info', function (string $ticker) {
+    /** @var Client $client */
+    $client = $this->client;
+    $info = $client->getTickerInfo($ticker);
+    $this->assertInstanceOf(TickerInfo::class, $info);
 })->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');

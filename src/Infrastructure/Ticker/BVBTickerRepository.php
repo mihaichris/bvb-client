@@ -7,7 +7,6 @@ use BVB\Domain\Ticker\TickerRepository;
 use Carbon\Carbon;
 use Exception;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class BVBTickerRepository implements TickerRepository
 {
