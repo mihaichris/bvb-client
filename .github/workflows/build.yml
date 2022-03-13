@@ -87,33 +87,6 @@ jobs:
         shell: "bash"
         run: "./vendor/bin/pest --testsuite=Feature"
 
-  code-coverage:
-    name: "Code coverage"
-    needs: ["unit-tests", "coding-standards", "static-analysis"]
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: "Checkout repository"
-        uses: "actions/checkout@v2"
-
-      - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
-        with:
-          php-version: "8.1.1"
-          coverage: "xdebug"
-          ini-values: "memory_limit=-1"
-
-      - name: "Install dependencies (Composer)"
-        uses: "ramsey/composer-install@v2"
-
-      - name: "Run unit tests (PHPUnit)"
-        shell: "bash"
-        run: "./vendor/bin/pest --coverage-html build/coverage"
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: coverage
-          path: build/coverage
-
   mutation-tests:
     name: "Mutation tests"
     needs: ["unit-tests"]
