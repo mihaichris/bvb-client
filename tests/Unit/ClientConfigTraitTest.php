@@ -1,6 +1,6 @@
 <?php
 
-namespace BVB;
+namespace BVB\Tests\Unit;
 
 use DI\Container;
 use BVB\ClientConfigTrait;
@@ -18,7 +18,6 @@ class ClientConfigTraitTest extends TestCase
         $this->__clientConfigTrait();
         $this->initServiceContainer();
     }
-
 
     public function test_on_init_service_container_will_not_be_null()
     {
