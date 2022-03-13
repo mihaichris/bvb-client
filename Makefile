@@ -20,3 +20,5 @@ static-analysis:
 	./vendor/bin/phpcs --standard=PSR12 ./src/
 	@echo "Running Psalm"
 	./vendor/bin/psalm
+
+build: static-analysis test mutation-test
