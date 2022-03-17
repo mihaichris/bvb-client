@@ -2,7 +2,7 @@
 
 namespace BVB;
 
-use BVB\Domain\Ticker\TickerFactory;
+use BVB\Infrastructure\Ticker\TickerFactory;
 use DI\Container;
 use DI\ContainerBuilder;
 

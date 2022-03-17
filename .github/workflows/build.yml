@@ -4,7 +4,22 @@ on:
   pull_request:
     branches:
       - "main"
+  push:
+    branches:
+        - "main"
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.gitignore'
+      - '.env.example'
+      - '.gitattributes'
+      - 'infection.json'
+      - 'psalm.xml'
 
+  schedule:
+    - cron: '0 0 1 * *'
+    
 # Cancels all previous workflow runs for the same branch that have not yet completed.
 concurrency:
   # The concurrency group contains the workflow name and the branch name.
@@ -25,7 +40,10 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "8.1.1"
+          php-version:
+            - "7.4"
+            - "8.0"
+            - "8.1"
           coverage: "none"
 
       - name: "Install dependencies (Composer)"
@@ -45,7 +63,10 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "8.1.1"
+          php-version:
+            - "7.4"
+            - "8.0"
+            - "8.1"
           coverage: "none"
 
       - name: "Install dependencies (Composer)"
@@ -70,7 +91,10 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "8.1.1"
+          php-version:
+            - "7.4"
+            - "8.0"
+            - "8.1"
           coverage: "none"
 
       - name: "Install dependencies (Composer)"
@@ -99,7 +123,10 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "8.1.1"
+          php-version:
+            - "7.4"
+            - "8.0"
+            - "8.1"
           coverage: "xdebug"
 
       - name: "Install dependencies (Composer)"

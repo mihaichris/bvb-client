@@ -1,8 +1,8 @@
 <?php
 
 use BVB\Domain\Ticker\Ticker;
-use BVB\Domain\Ticker\TickerFactory;
 use BVB\Domain\Ticker\TickerInfo;
+use BVB\Infrastructure\Ticker\TickerFactory;
 use BVB\Domain\Ticker\TickerRepository;
 
 beforeEach(function () {
@@ -19,6 +19,6 @@ beforeEach(function () {
 it("should create a ticker class", function (string $ticker) {
     /** @var TickerFactory $factory */
     $factory = $this->factory;
-    $ticker = $factory->create($ticker);
+    $ticker = $factory->createTicker($ticker);
     expect($ticker)->toBeInstanceOf(Ticker::class);
 })->with(['TRP', 'IMP', 'ALR']);
