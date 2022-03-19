@@ -3,6 +3,7 @@
     "description": "Bucharest Stock Exchange API Client",
     "type": "library",
     "require": {
+        "php": "^7.4|^8.0",
         "php-di/php-di": "^6.3",
         "symfony/http-client": "^6.0",
         "symfony/dom-crawler": "^6.0",
