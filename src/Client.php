@@ -24,18 +24,18 @@ class Client implements ClientInterface
 
     public function getTicker(string $ticker): Ticker
     {
-        return $this->factory->createTicker($ticker);
+        return $this->factory->create($ticker);
     }
 
     public function getTickerPrice(string $ticker): float
     {
-        $ticker = $this->factory->createTicker($ticker);
+        $ticker = $this->factory->create($ticker);
         return $ticker->getPrice();
     }
 
     public function getTickerInfo(string $ticker): TickerInfo
     {
-        $ticker = $this->factory->createTicker($ticker);
+        $ticker = $this->factory->create($ticker);
         return $ticker->getInfo();
     }
 }

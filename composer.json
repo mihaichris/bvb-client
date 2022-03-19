@@ -2,6 +2,12 @@
     "name": "mihaichris/bvb-client",
     "description": "Bucharest Stock Exchange API Client",
     "type": "library",
+    "keywords": [
+        "bvb",
+        "api",
+        "client"
+    ],
+    "homepage": "https://github.com/mihaichris/bvb-client",
     "require": {
         "php": "^7.4|^8.0",
         "php-di/php-di": "^6.3",
@@ -21,7 +27,7 @@
         "pestphp/pest-plugin-parallel": "^1.0",
         "pestphp/pest-plugin-mock": "^1.0"
     },
-    "license": "MIT License",
+    "license": "MIT",
     "autoload": {
         "classmap": [
             "src/"
