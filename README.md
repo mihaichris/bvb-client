@@ -1,6 +1,6 @@
 # bvb-client
 
-[![Build Status](https://github.com/mihaichris/bvb-client/actions/workflows/build.yml/badge.svg)](https://github.com/mihaichris/bvb-client/actions/workflows/build.yml) [![Latest Stable Version](http://poser.pugx.org/mihaichris/bvb-client/v)](https://packagist.org/packages/phpunit/phpunit) [![License](http://poser.pugx.org/mihaichris/bvb-client/license)](https://github.com/mihaichris/bvb-client/actions/workflows/build.yml) [![PHP Version Require](http://poser.pugx.org/mihaichris/bvb-client/require/php)](https://github.com/mihaichris/bvb-client/actions/workflows/build.yml)
+[![Build Status](https://github.com/mihaichris/bvb-client/actions/workflows/build.yml/badge.svg)](https://github.com/mihaichris/bvb-client/actions/workflows/build.yml) [![Latest Stable Version](http://poser.pugx.org/mihaichris/bvb-client/v)](https://packagist.org/packages/phpunit/phpunit) [![License](http://poser.pugx.org/mihaichris/bvb-client/license)](https://github.com/mihaichris/bvb-client/actions/workflows/build.yml) [![PHP Version Require](http://poser.pugx.org/mihaichris/bvb-client/require/php)](https://packagist.org/packages/mihaichris/bvb-client)
 
 ## Description
 
