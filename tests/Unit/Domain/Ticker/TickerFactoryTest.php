@@ -19,6 +19,6 @@ beforeEach(function () {
 it("should create a ticker class", function (string $ticker) {
     /** @var TickerFactory $factory */
     $factory = $this->factory;
-    $ticker = $factory->createTicker($ticker);
+    $ticker = $factory->create($ticker);
     expect($ticker)->toBeInstanceOf(Ticker::class);
 })->with(['TRP', 'IMP', 'ALR']);
