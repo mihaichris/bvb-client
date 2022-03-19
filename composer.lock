@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91211c5aaf7a170cb6198ee8e785ba43",
+    "content-hash": "ef8b060472d5c92ccb8ffd6416ec5340",
     "packages": [
         {
             "name": "nesbot/carbon",
@@ -6482,7 +6482,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4|^8.0"
+        "php": ">=7.4"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
