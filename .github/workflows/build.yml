@@ -40,10 +40,7 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version:
-            - "7.4"
-            - "8.0"
-            - "8.1"
+          php-version: "8.1.1"
           coverage: "none"
 
       - name: "Install dependencies (Composer)"
@@ -63,10 +60,7 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version:
-            - "7.4"
-            - "8.0"
-            - "8.1"
+          php-version: "8.1.1"
           coverage: "none"
 
       - name: "Install dependencies (Composer)"
@@ -80,9 +74,23 @@ jobs:
         shell: "bash"
         run: "./vendor/bin/psalm"
 
+  
   unit-tests:
     name: "Unit tests"
     runs-on: "ubuntu-latest"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "7.4"
+          - "8.0"
+          - "8.1"
+        operating-system:
+          - "ubuntu-latest"
+        dependencies:
+          - "lowest"
+          - "highest"
 
     steps:
       - name: "Checkout repository"
@@ -91,10 +99,7 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version:
-            - "7.4"
-            - "8.0"
-            - "8.1"
+          php-version: "8.1.1"
           coverage: "none"
 
       - name: "Install dependencies (Composer)"
@@ -123,10 +128,7 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version:
-            - "7.4"
-            - "8.0"
-            - "8.1"
+          php-version: "8.1.1"
           coverage: "xdebug"
 
       - name: "Install dependencies (Composer)"
