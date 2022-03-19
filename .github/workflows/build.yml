@@ -89,7 +89,6 @@ jobs:
         operating-system:
           - "ubuntu-latest"
         dependencies:
-          - "lowest"
           - "highest"
 
     steps:
