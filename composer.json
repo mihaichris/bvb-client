@@ -20,7 +20,7 @@
         "pestphp/pest-plugin-parallel": "^1.0",
         "pestphp/pest-plugin-mock": "^1.0"
     },
-    "license": "MIT License",
+    "license": "MIT",
     "autoload": {
         "classmap": [
             "src/"
