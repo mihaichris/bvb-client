@@ -88,8 +88,6 @@ jobs:
           - "8.1"
         operating-system:
           - "ubuntu-latest"
-        dependencies:
-          - "highest"
 
     steps:
       - name: "Checkout repository"
