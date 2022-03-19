@@ -16,7 +16,7 @@ class TickerFactory implements TickerFactoryInterface
         $this->tickerRepository = $tickerRepository;
     }
 
-    public function createTicker(string $ticker): Ticker
+    public function create(string $ticker): Ticker
     {
         return new BVBTicker($ticker, $this->tickerRepository);
     }
