@@ -15,7 +15,7 @@ $ composer require mihaichris/bvb-client
 ```
 
 
-## Usage
+## Basic Usage
 
 ```php
 use BVB\Client;
