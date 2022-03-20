@@ -24,8 +24,6 @@
 |
 */
 
-use Symfony\Component\HttpClient\HttpClient;
-
 expect()->extend('toBeOne', function () {
     return $this->toBe(1);
 });
@@ -43,6 +41,6 @@ expect()->extend('toBeOne', function () {
 
 function http(string $method, string $url)
 {
-    $httpClient = HttpClient::create();
-    return $httpClient->request($method, $url);
+    $client = new \GuzzleHttp\Client();
+    return $client->request($method, $url);
 }

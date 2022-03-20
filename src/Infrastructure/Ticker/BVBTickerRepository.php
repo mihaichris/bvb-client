@@ -6,7 +6,9 @@ use BVB\Domain\Ticker\TickerInfo;
 use BVB\Domain\Ticker\TickerRepository;
 use Carbon\Carbon;
 use Exception;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 
 class BVBTickerRepository implements TickerRepository
 {
@@ -15,13 +17,22 @@ class BVBTickerRepository implements TickerRepository
     private const STATUS_NO_DATA = "no_data";
     private static string $tickerHistoryUrl;
     private static string $tickerSymbolUrl;
-    private HttpClientInterface $client;
+    private ClientInterface $client;
+    private RequestFactoryInterface $requestFactory;
+    private UriFactoryInterface $uriFactory;
 
-    public function __construct(string $tickerHistoryUrl, string $tickerSymbolUrl, HttpClientInterface $client)
-    {
+    public function __construct(
+        string $tickerHistoryUrl,
+        string $tickerSymbolUrl,
+        ClientInterface $client,
+        RequestFactoryInterface $requestFactory,
+        UriFactoryInterface $uriFactory
+    ) {
         self::$tickerHistoryUrl = $tickerHistoryUrl;
         self::$tickerSymbolUrl = $tickerSymbolUrl;
         $this->client = $client;
+        $this->requestFactory = $requestFactory;
+        $this->uriFactory = $uriFactory;
     }
 
     /** @throws Exception */
@@ -47,10 +58,12 @@ class BVBTickerRepository implements TickerRepository
     }
 
     /** @return array<mixed> */
-    private function get(string $url): array
+    private function get(string $uri): array
     {
-        $response = $this->client->request('GET', $url);
-        return json_decode($response->getContent(), true);
+        $uri = $this->uriFactory->createUri($uri);
+        $request = $this->requestFactory->createRequest('GET', $uri);
+        $response = $this->client->sendRequest($request);
+        return json_decode($response->getBody(), true);
     }
 
     private function buildTickerHistoryUrl(

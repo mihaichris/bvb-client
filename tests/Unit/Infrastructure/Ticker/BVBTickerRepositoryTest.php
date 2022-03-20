@@ -2,21 +2,39 @@
 
 use BVB\Infrastructure\Ticker\BVBTickerRepository;
 use Pest\Mock\Mock;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriFactoryInterface;
+use Psr\Http\Message\UriInterface;
 
 it('should throw exception if data not found', function (string $ticker) {
     /** @var Mock $responseInterface */
     $responseInterface = mock(ResponseInterface::class);
     $responseInterface = $responseInterface->expect(
-        getContent: fn () => '{"s":"no_data"}'
+        getBody: fn () => '{"s":"no_data"}'
     );
+    /** @var Mock $requestInterface */
+    $requestInterface = mock(RequestInterface::class);
+    $requestInterface = $requestInterface->expect();
+    /** @var Mock $uriInterface */
+    $uriInterface = mock(UriInterface::class);
+    $uriInterface = $uriInterface->expect();
     /** @var Mock $client */
-    $client = mock(HttpClientInterface::class);
+    $client = mock(ClientInterface::class);
+    $requestFactory = mock(RequestFactoryInterface::class);
+    $uriFactory = mock(UriFactoryInterface::class);
     $client = $client->expect(
-        request: fn () => $responseInterface
+        sendRequest: fn () => $responseInterface
     );
-    /** @var HttpClientInterface $client */
-    $bvbTickerRepository = new BVBTickerRepository('tickerHistoryUrl', 'tickerSymbolUrl', $client);
+    $requestFactory = $requestFactory->expect(
+        createRequest: fn () => $requestInterface
+    );
+    $uriFactory = $uriFactory->expect(
+        createUri: fn () => $uriInterface
+    );
+    /** @var ClientInterface $client */
+    $bvbTickerRepository = new BVBTickerRepository('tickerHistoryUrl', 'tickerSymbolUrl', $client, $requestFactory, $uriFactory);
     $bvbTickerRepository->getLastClosed($ticker);
 })->with(['ticker'])->expectExceptionMessage('No data found');

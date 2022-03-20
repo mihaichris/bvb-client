@@ -8,7 +8,7 @@
 
 ### Changed
 
-- Nothing.
+- PSR-17
 
 ### Deprecated
 
