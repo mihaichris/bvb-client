@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use Exception;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Http\Message\UriFactoryInterface;
 
 class BVBTickerRepository implements TickerRepository
 {
@@ -19,20 +18,17 @@ class BVBTickerRepository implements TickerRepository
     private static string $tickerSymbolUrl;
     private ClientInterface $client;
     private RequestFactoryInterface $requestFactory;
-    private UriFactoryInterface $uriFactory;
 
     public function __construct(
         string $tickerHistoryUrl,
         string $tickerSymbolUrl,
         ClientInterface $client,
         RequestFactoryInterface $requestFactory,
-        UriFactoryInterface $uriFactory
     ) {
         self::$tickerHistoryUrl = $tickerHistoryUrl;
         self::$tickerSymbolUrl = $tickerSymbolUrl;
         $this->client = $client;
         $this->requestFactory = $requestFactory;
-        $this->uriFactory = $uriFactory;
     }
 
     /** @throws Exception */
@@ -60,7 +56,6 @@ class BVBTickerRepository implements TickerRepository
     /** @return array<mixed> */
     private function get(string $uri): array
     {
-        $uri = $this->uriFactory->createUri($uri);
         $request = $this->requestFactory->createRequest('GET', $uri);
         $response = $this->client->sendRequest($request);
         return json_decode($response->getBody(), true);

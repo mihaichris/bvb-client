@@ -24,8 +24,7 @@ return [
             get('bvb.api.ticker.historyUrl'),
             get('bvb.api.ticker.symbolUrl'),
             get(ClientInterface::class),
-            get(RequestFactoryInterface::class),
-            get(UriFactoryInterface::class)
+            get(RequestFactoryInterface::class)
         ),
     TickerFactory::class => create()
         ->constructor(get(BVBTickerRepository::class)),
