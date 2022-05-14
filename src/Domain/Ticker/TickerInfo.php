@@ -16,9 +16,6 @@ class TickerInfo
         if ("" === $this->name) {
             throw new Exception("Name should not be null");
         }
-        if ("" === $this->description) {
-            throw new Exception("Description should not be null");
-        }
         if ("" === $this->ticker) {
             throw new Exception("Ticker should not be null");
         }

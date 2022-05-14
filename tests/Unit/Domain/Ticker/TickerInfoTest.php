@@ -11,10 +11,6 @@ it('should fail validation with wrong name', function (string $name, string $des
     $tickerInfo = new TickerInfo($name, $description, $ticker);
 })->with([''])->with(['description'])->with(['ticker'])->expectExceptionMessage('Name should not be null');
 
-it('should fail validation with wrong description', function (string $name, string $description, string $ticker) {
-    $tickerInfo = new TickerInfo($name, $description, $ticker);
-})->with(['name'])->with([''])->with(['ticker'])->expectExceptionMessage('Description should not be null');
-
 it('should fail validation with wrong ticker', function (string $name, string $description, string $ticker) {
     $tickerInfo = new TickerInfo($name, $description, $ticker);
 })->with(['name'])->with(['description'])->with([''])->expectExceptionMessage('Ticker should not be null');
