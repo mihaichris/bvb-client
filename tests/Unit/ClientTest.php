@@ -26,14 +26,14 @@ test('ticker is not null when i give a ticker parameter', function (string $tick
     $this->assertNotNull($this->client->getTicker($ticker));
 })->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
 
-test('ticker is bvb ticker instance when i give a ticker parameter', function (string $ticker) {
+test('ticker is bvb ticker instance when I give a ticker parameter', function (string $ticker) {
     $this->assertInstanceOf(BVBTicker::class, $this->client->getTicker($ticker));
 })->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
 
 it('should throw exception if ticker could provided could not be found', function () {
     /** @var Client $client */
     $client = $this->client;
-    $ticker = $client->getTicker('TEST');
+    $ticker = $client->getTicker('TESTTEST');
     $ticker->getPrice();
 })->group('integration')->expectExceptionMessage("Ticker not found");
 
