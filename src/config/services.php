@@ -1,5 +1,6 @@
 <?php
 
+use BVB\Infrastructure\Http\Client\HttpClient;
 use BVB\Infrastructure\Ticker\BVBTickerRepository;
 use BVB\Infrastructure\Ticker\TickerFactory;
 use DI\Container;
@@ -19,12 +20,12 @@ return [
     },
     RequestFactoryInterface::class => autowire(HttpFactory::class),
     UriFactoryInterface::class => autowire(HttpFactory::class),
+    HttpClient::class => autowire(HttpClient::class),
     BVBTickerRepository::class => create()
         ->constructor(
             get('bvb.api.ticker.historyUrl'),
             get('bvb.api.ticker.symbolUrl'),
-            get(ClientInterface::class),
-            get(RequestFactoryInterface::class)
+            get(HttpClient::class)
         ),
     TickerFactory::class => create()
         ->constructor(get(BVBTickerRepository::class)),
