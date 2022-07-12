@@ -18,7 +18,8 @@ class Crawler
     public function crawl(string $website): SymfonyCrawler
     {
         $response = $this->httpClient->get($website);
-        $this->crawler = new SymfonyCrawler($response);
+        $content = json_decode($response->getBody(), true);
+        $this->crawler = new SymfonyCrawler($content);
         return $this->crawler;
     }
 }

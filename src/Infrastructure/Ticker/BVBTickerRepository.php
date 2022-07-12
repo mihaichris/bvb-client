@@ -34,18 +34,20 @@ class BVBTickerRepository implements TickerRepository
         $unixEndDate = Carbon::now()->timestamp;
         $tickerHistoryUrl = $this->buildTickerHistoryUrl($ticker, $unixStartDate, $unixEndDate);
         $response = $this->httpClient->get($tickerHistoryUrl);
-        if (self::STATUS_NO_DATA === $response[self::STATUS_KEY]) {
+        $content = json_decode($response->getBody(), true);
+        if (self::STATUS_NO_DATA === $content[self::STATUS_KEY]) {
             throw new Exception("No data found");
         }
-        return end($response[self::CLOSED_KEY]);
+        return end($content[self::CLOSED_KEY]);
     }
 
     public function getTickerInfo(string $ticker): TickerInfo
     {
         $tickerSymbolUrl = $this->buildTickerSymbolUrl($ticker);
         $response = $this->httpClient->get($tickerSymbolUrl);
-        $companyName = $response['description'] ?? "";
-        $description = $response['industry'] ?? "";
+        $content = json_decode($response->getBody(), true);
+        $companyName = $content['description'] ?? "";
+        $description = $content['industry'] ?? "";
         return new TickerInfo($companyName, $description, $ticker);
     }
 

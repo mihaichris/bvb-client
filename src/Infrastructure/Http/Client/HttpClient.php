@@ -17,7 +17,6 @@ class HttpClient
         $this->requestFactory = $requestFactory;
     }
 
-    /** @return array<mixed> */
     public function get(string $uri): ResponseInterface
     {
         $request = $this->requestFactory->createRequest('GET', $uri);

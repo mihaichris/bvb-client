@@ -11,7 +11,7 @@ class TickerInfo
         $this->validate();
     }
 
-    private function validate()
+    private function validate(): void
     {
         if ("" === $this->name) {
             throw new Exception("Name should not be null");

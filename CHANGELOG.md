@@ -1,14 +1,15 @@
 # BVB Client Change Log
 
-## 0.X.Y - 
+## 0.1.2 - 
 
 ### Added
 
-- Nothing.
+- PSR-17: HTTP Factories
+- PSR-18: HTTP Client
 
 ### Changed
 
-- PSR-17
+- Unit Tests
 
 ### Deprecated
 

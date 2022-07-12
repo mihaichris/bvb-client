@@ -2,8 +2,8 @@
 
 use BVB\Infrastructure\Crawler\Crawler;
 use BVB\Infrastructure\Http\Client\HttpClient;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DomCrawler\Crawler as SymfonyCrawler;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 
 beforeEach(function () {
     $this->httpClient = mock(HttpClient::class);
@@ -18,26 +18,11 @@ it('should return a symfony crawler with success', function () {
     /** @var Mock $responseInterface */
     $responseInterface = mock(ResponseInterface::class);
     $responseInterface = $responseInterface->expect(
-        getContent: fn () => 'website',
-        getStatusCode: fn () => 200
+        getBody: fn () => 'website',
     );
     $httpClient = $this->httpClient->expect(
-        request: fn () => $responseInterface
+        get: fn () => $responseInterface
     );
     $crawler = new Crawler($httpClient);
     $this->assertInstanceOf(SymfonyCrawler::class, $crawler->crawl('website'));
 });
-
-
-// it('should throw an exception when fail getting a symfony crawler', function () {
-//     /** @var Mock $responseInterface */
-//     $responseInterface = mock(ResponseInterface::class);
-//     $responseInterface = $responseInterface->expect(
-//         getStatusCode: fn () => 500
-//     );
-//     $httpClient = $this->httpClient->expect(
-//         request: fn () => $responseInterface
-//     );
-//     $crawler = new Crawler($httpClient);
-//     $crawler->crawl('website');
-// })->expectExceptionMessage("Error requesting data from website");
