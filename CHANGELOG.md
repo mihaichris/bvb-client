@@ -6,10 +6,12 @@
 
 - PSR-17: HTTP Factories
 - PSR-18: HTTP Client
+- Added own HTTP Client
 
 ### Changed
 
 - Unit Tests
+- PHP Stan level 9
 
 ### Deprecated
 
