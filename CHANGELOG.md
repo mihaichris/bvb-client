@@ -1,14 +1,17 @@
 # BVB Client Change Log
 
-## 0.X.Y - 
+## 0.1.2 - 2022-07-12
 
 ### Added
 
-- Nothing.
+- PSR-17: HTTP Factories
+- PSR-18: HTTP Client
+- Added own HTTP Client
 
 ### Changed
 
-- Nothing.
+- Unit Tests
+- PHP Stan level 8
 
 ### Deprecated
 

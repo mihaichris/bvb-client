@@ -68,7 +68,7 @@ jobs:
 
       - name: "Statically analyze code (PHPStan)"
         shell: "bash"
-        run: "./vendor/bin/phpstan analyze ./src/"
+        run: "./vendor/bin/phpstan analyze ./src/ --level 8"
 
       - name: "Statically analyze code (Psalm)"
         shell: "bash"

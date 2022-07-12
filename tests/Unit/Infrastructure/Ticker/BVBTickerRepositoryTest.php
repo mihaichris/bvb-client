@@ -1,22 +1,24 @@
 <?php
 
+use BVB\Infrastructure\Http\Client\HttpClient;
 use BVB\Infrastructure\Ticker\BVBTickerRepository;
 use Pest\Mock\Mock;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 
 it('should throw exception if data not found', function (string $ticker) {
-    /** @var Mock $responseInterface */
-    $responseInterface = mock(ResponseInterface::class);
-    $responseInterface = $responseInterface->expect(
-        getContent: fn () => '{"s":"no_data"}'
+    /** @var ResponseInterface $response */
+    $response = mock(ResponseInterface::class);
+    $response = $response->expect(
+        getBody: fn () => '{"s":"no_data"}'
     );
-    /** @var Mock $client */
-    $client = mock(HttpClientInterface::class);
-    $client = $client->expect(
-        request: fn () => $responseInterface
+    /** @var Mock $httpClient */
+    $httpClient = mock(HttpClient::class);
+    $httpClient = $httpClient->expect(
+        get: fn () => $response
     );
-    /** @var HttpClientInterface $client */
-    $bvbTickerRepository = new BVBTickerRepository('tickerHistoryUrl', 'tickerSymbolUrl', $client);
+
+    /** @var ClientInterface $client */
+    $bvbTickerRepository = new BVBTickerRepository('tickerHistoryUrl', 'tickerSymbolUrl', $httpClient);
     $bvbTickerRepository->getLastClosed($ticker);
 })->with(['ticker'])->expectExceptionMessage('No data found');

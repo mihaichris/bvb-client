@@ -4,9 +4,9 @@ namespace BVB\Infrastructure\Ticker;
 
 use BVB\Domain\Ticker\TickerInfo;
 use BVB\Domain\Ticker\TickerRepository;
+use BVB\Infrastructure\Http\Client\HttpClient;
 use Carbon\Carbon;
 use Exception;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class BVBTickerRepository implements TickerRepository
 {
@@ -15,13 +15,16 @@ class BVBTickerRepository implements TickerRepository
     private const STATUS_NO_DATA = "no_data";
     private static string $tickerHistoryUrl;
     private static string $tickerSymbolUrl;
-    private HttpClientInterface $client;
+    private HttpClient $httpClient;
 
-    public function __construct(string $tickerHistoryUrl, string $tickerSymbolUrl, HttpClientInterface $client)
-    {
+    public function __construct(
+        string $tickerHistoryUrl,
+        string $tickerSymbolUrl,
+        HttpClient $httpClient
+    ) {
         self::$tickerHistoryUrl = $tickerHistoryUrl;
         self::$tickerSymbolUrl = $tickerSymbolUrl;
-        $this->client = $client;
+        $this->httpClient = $httpClient;
     }
 
     /** @throws Exception */
@@ -30,27 +33,22 @@ class BVBTickerRepository implements TickerRepository
         $unixStartDate = Carbon::yesterday()->timestamp;
         $unixEndDate = Carbon::now()->timestamp;
         $tickerHistoryUrl = $this->buildTickerHistoryUrl($ticker, $unixStartDate, $unixEndDate);
-        $response = $this->get($tickerHistoryUrl);
-        if (self::STATUS_NO_DATA === $response[self::STATUS_KEY]) {
+        $response = $this->httpClient->get($tickerHistoryUrl);
+        $content = json_decode((string) $response->getBody(), true);
+        if (self::STATUS_NO_DATA === $content[self::STATUS_KEY]) {
             throw new Exception("No data found");
         }
-        return end($response[self::CLOSED_KEY]);
+        return end($content[self::CLOSED_KEY]);
     }
 
     public function getTickerInfo(string $ticker): TickerInfo
     {
         $tickerSymbolUrl = $this->buildTickerSymbolUrl($ticker);
-        $response = $this->get($tickerSymbolUrl);
-        $companyName = $response['description'] ?? "";
-        $description = $response['industry'] ?? "";
+        $response = $this->httpClient->get($tickerSymbolUrl);
+        $content = json_decode((string) $response->getBody(), true);
+        $companyName = $content['description'] ?? "";
+        $description = $content['industry'] ?? "";
         return new TickerInfo($companyName, $description, $ticker);
-    }
-
-    /** @return array<mixed> */
-    private function get(string $url): array
-    {
-        $response = $this->client->request('GET', $url);
-        return json_decode($response->getContent(), true);
     }
 
     private function buildTickerHistoryUrl(
