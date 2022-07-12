@@ -1,6 +1,6 @@
 # BVB Client Change Log
 
-## 0.1.2 - 
+## 0.1.2 - 2022-07-12
 
 ### Added
 
@@ -11,7 +11,7 @@
 ### Changed
 
 - Unit Tests
-- PHP Stan level 9
+- PHP Stan level 8
 
 ### Deprecated
 
