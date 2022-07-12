@@ -24,6 +24,7 @@
 ### Fixed
 
 - Badges from the README
+- Guzzle Security update
 
 ## 0.1.0 - 2022-03-20
 
