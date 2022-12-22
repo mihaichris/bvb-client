@@ -1,6 +1,6 @@
 # bvb-client
 
-[![Build Status](https://img.shields.io/github/workflow/status/mihaichris/bvb-client/build)](https://github.com/mihaichris/bvb-client/actions/workflows/build.yml) 
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mihaichris/bvb-client/build.yml) 
 [![Latest Stable Version](https://img.shields.io/github/v/release/mihaichris/bvb-client?color=green&include_prereleases)](https://packagist.org/packages/mihaichris/bvb-client)
 [![Latest Stable Version](https://img.shields.io/github/last-commit/mihaichris/bvb-client)](https://github.com/mihaichris/bvb-client) [![issues](https://img.shields.io/github/issues/mihaichris/bvb-client)](https://packagist.org/packages/mihaichris/bvb-client) [![License](https://img.shields.io/github/license/mihaichris/bvb-client)](https://github.com/mihaichris/bvb-client/actions/workflows/build.yml) [![PHP Version Require](https://img.shields.io/packagist/php-v/mihaichris/bvb-client)](https://packagist.org/packages/mihaichris/bvb-client)
 
