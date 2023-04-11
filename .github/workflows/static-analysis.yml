@@ -1,0 +1,60 @@
+name: "Static Analysis"
+
+on:
+  pull_request:
+    branches:
+      - "main"
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  COMPOSER_ROOT_VERSION: "2.2.3"
+
+jobs:
+  coding-standards:
+    name: "Coding standards"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v3"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "8.1.1"
+          coverage: "none"
+
+      - name: "Install dependencies (Composer)"
+        uses: "ramsey/composer-install@v2"
+
+      - name: "Check coding standards (PHP_CodeSniffer)"
+        shell: "bash"
+        run: "./vendor/bin/phpcs ./src/ --standard=PSR12"
+
+  static-analysis:
+    name: "Static analysis"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v3"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "8.1.1"
+          coverage: "none"
+
+      - name: "Install dependencies (Composer)"
+        uses: "ramsey/composer-install@v2"
+
+      - name: "Statically analyze code (PHPStan)"
+        shell: "bash"
+        run: "./vendor/bin/phpstan analyze ./src/ --level 8"
+
+      - name: "Statically analyze code (Psalm)"
+        shell: "bash"
+        run: "./vendor/bin/psalm"
