@@ -11,8 +11,6 @@
     "require": {
         "php": ">=7.4",
         "php-di/php-di": "^6.3",
-        "symfony/dom-crawler": "^6.0",
-        "symfony/css-selector": "^6.0",
         "nesbot/carbon": "^2.56",
         "guzzlehttp/guzzle": "^7.4",
         "psr/http-client": "^1.0"
