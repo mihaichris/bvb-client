@@ -5,6 +5,7 @@ namespace BVB\Tests\Unit;
 use BVB\Client;
 use BVB\Domain\Ticker\TickerInfo;
 use BVB\Infrastructure\Ticker\BVBTicker;
+use Exception;
 
 beforeEach(function () {
     $this->client = new Client();
@@ -20,7 +21,7 @@ test('client is client instance', function () {
 
 test('get ticker without parameter will get error', function () {
     $this->client->getTicker();
-})->group('integration')->expectError();
+})->group('integration')->expectException(Exception::class);
 
 test('ticker is not null when i give a ticker parameter', function (string $ticker) {
     $this->assertNotNull($this->client->getTicker($ticker));

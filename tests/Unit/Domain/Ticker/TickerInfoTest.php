@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 it('should fail if instance with no parameters', function () {
     $tickerInfo = new TickerInfo();
-})->expectError();
+})->expectException(Exception::class);
 
 it('should fail validation with wrong name', function (string $name, string $description, string $ticker) {
     $tickerInfo = new TickerInfo($name, $description, $ticker);
