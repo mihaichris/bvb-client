@@ -17,9 +17,6 @@ on:
       - 'infection.json'
       - 'psalm.xml'
 
-  schedule:
-    - cron: '0 0 1 * *'
-    
 # Cancels all previous workflow runs for the same branch that have not yet completed.
 concurrency:
   # The concurrency group contains the workflow name and the branch name.
@@ -74,7 +71,7 @@ jobs:
         shell: "bash"
         run: "./vendor/bin/psalm"
 
-  
+
   unit-tests:
     name: "Unit tests"
     runs-on: "ubuntu-latest"
