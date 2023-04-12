@@ -20,7 +20,6 @@
         "squizlabs/php_codesniffer": "^3.6",
         "phpstan/phpstan": "^1.4",
         "infection/infection": "^0.26.6",
-        "vimeo/psalm": "^4.19",
         "symfony/var-dumper": "^6.0",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-parallel": "^1.0",
@@ -45,8 +44,7 @@
     },
     "authors": [
         {
-            "name": "Mihai",
-            "email": "48624094+mihaichris@users.noreply.github.com"
+            "name": "Mihai-Cristian Fagadau"
         }
     ],
     "config": {
@@ -55,5 +53,13 @@
             "composer/package-versions-deprecated": true,
             "pestphp/pest-plugin": true
         }
+    },
+    "scripts": {
+        "unit": "pest --testsuite=Unit --parallel",
+        "feature": "pest --testsuite=Feature --parallel",
+        "coverage": "pest --coverage-html --parallel build/coverage",
+        "static-analysis": "phpstan analyze ./src/ --level 8",
+        "code-analysis": "phpcs --standard=PSR12 ./src/",
+        "mutation": "XDEBUG_MODE=coverage infection --test-framework=pest --show-mutations"
     }
 }
