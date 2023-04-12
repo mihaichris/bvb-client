@@ -47,11 +47,11 @@ jobs:
 
       - name: "Run unit tests"
         shell: "bash"
-        run: "./vendor/bin/pest --testsuite=Unit"
+        run: "composer run unit"
 
       - name: "Run features tests"
         shell: "bash"
-        run: "./vendor/bin/pest --testsuite=Feature"
+        run: "composer run feature"
 
   mutation-tests:
     name: "Mutation tests"
@@ -76,4 +76,4 @@ jobs:
 
       - name: "Run mutation tests (Infection)"
         shell: "bash"
-        run: "XDEBUG_MODE=coverage ./vendor/bin/infection --test-framework=pest --show-mutations"
+        run: "composer run mutation"

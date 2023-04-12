@@ -33,7 +33,7 @@ jobs:
 
       - name: "Check coding standards (PHP_CodeSniffer)"
         shell: "bash"
-        run: "./vendor/bin/phpcs ./src/ --standard=PSR12"
+        run: "composer run code-analysis"
 
   static-analysis:
     name: "Static analysis"
@@ -53,8 +53,4 @@ jobs:
 
       - name: "Statically analyze code (PHPStan)"
         shell: "bash"
-        run: "./vendor/bin/phpstan analyze ./src/ --level 8"
-
-      - name: "Statically analyze code (Psalm)"
-        shell: "bash"
-        run: "./vendor/bin/psalm"
+        run: "composer run static-analysis"
