@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Apr 11 14:03:39 2023
+# Make data base, printed on Wed Apr 12 07:46:48 2023
 
 # Variables
 
@@ -39,7 +39,7 @@ MAKE_COMMAND := C:/Users/mihai/scoop/apps/make/current/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\LOCAL\crashpad_27816_DHURVQAXCCGYAZZU
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\LOCAL\crashpad_25480_DWRWHFKBYJJLVODB
 # environment
 ONEDRIVECOMMERCIAL = C:\Users\mihai\OneDrive - unibuc.ro
 # environment
@@ -50,12 +50,14 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 .VARIABLES := 
 # automatic
 %D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
+# environment
+EFC_6548 = 1
 # automatic
 ^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = C:\Users\mihai\AppData\Roaming\Code\CachedData\b7886d7461186a5eac768481578c1d7ca80e2d21
+VSCODE_CODE_CACHE_PATH = C:\Users\mihai\AppData\Roaming\Code\CachedData\e344f1f539a80912a0e9357cec841f36ce97a4e2
 # environment
 LANG = C
 # default
@@ -70,12 +72,12 @@ PROCESSOR_ARCHITEW6432 = AMD64
 MAKEFLAGS = pqrR
 # environment
 ONEDRIVE = C:\Users\mihai\OneDrive - unibuc.ro
-# environment
-EFC_12108 = 1
 # makefile
 CURDIR := c:/Users/mihai/Projects/bvb-client
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+VSCODE_L10N_BUNDLE_LOCATION = 
 # automatic
 *D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
 # environment
@@ -93,7 +95,7 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 27816
+VSCODE_PID = 25480
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -189,7 +191,7 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 TEMP = C:\Users\mihai\AppData\Local\Temp
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\19981d2fcc3c69bd642cf2f898f25b25-1.77.1-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\19981d2fcc3c69bd642cf2f898f25b25-1.77.2-main-sock
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -209,7 +211,7 @@ PYENV_HOME = C:\Users\mihai\scoop\apps\pyenv\current\pyenv-win
 # environment
 PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD
 # variable set hash-table stats:
-# Load=98/1024=10%, Rehash=0, Collisions=10/126=8%
+# Load=99/1024=10%, Rehash=0, Collisions=11/127=9%
 
 # Pattern-specific Variable Values
 
@@ -217,7 +219,7 @@ PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD
 
 # Directories
 
-# . (key c:/Users/mihai/Projects/bvb-client, mtime 1678791942): 25 files, no impossibilities.
+# . (key c:/Users/mihai/Projects/bvb-client, mtime 1681235976): 25 files, no impossibilities.
 
 # 25 files, no impossibilities in 1 directories.
 
@@ -314,6 +316,6 @@ mutation-test:
 # strcache performance: lookups = 49 / hit rate = 30%
 # hash-table stats:
 # Load=34/8192=0%, Rehash=0, Collisions=0/49=0%
-# Finished Make data base on Tue Apr 11 14:03:39 2023
+# Finished Make data base on Wed Apr 12 07:46:48 2023
 
  
