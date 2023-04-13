@@ -2,6 +2,7 @@
 
 namespace BVB\Infrastructure\Http\Client;
 
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -17,6 +18,7 @@ class HttpClient
         $this->requestFactory = $requestFactory;
     }
 
+    /** @throws ClientExceptionInterface */
     public function get(string $uri): ResponseInterface
     {
         $request = $this->requestFactory->createRequest('GET', $uri);

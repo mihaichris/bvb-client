@@ -2,10 +2,8 @@
 
 namespace BVB;
 
-use BVB\ClientConfigTrait;
 use BVB\Domain\Ticker\Ticker;
 use BVB\Domain\Ticker\TickerFactoryInterface;
-use BVB\Domain\Ticker\TickerInfo;
 
 class Client implements ClientInterface
 {
@@ -31,11 +29,5 @@ class Client implements ClientInterface
     {
         $ticker = $this->factory->create($ticker);
         return $ticker->getPrice();
-    }
-
-    public function getTickerInfo(string $ticker): TickerInfo
-    {
-        $ticker = $this->factory->create($ticker);
-        return $ticker->getInfo();
     }
 }

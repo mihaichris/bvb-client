@@ -2,6 +2,7 @@
 
 use BVB\Infrastructure\Http\Client\HttpClient;
 use BVB\Infrastructure\Ticker\BVBTickerRepository;
+use BVB\Infrastructure\Ticker\BVBTickerValidator;
 use BVB\Infrastructure\Ticker\TickerFactory;
 use DI\Container;
 use GuzzleHttp\Client;
@@ -22,11 +23,8 @@ return [
     UriFactoryInterface::class => autowire(HttpFactory::class),
     HttpClient::class => autowire(HttpClient::class),
     BVBTickerRepository::class => create()
-        ->constructor(
-            get('bvb.api.ticker.historyUrl'),
-            get('bvb.api.ticker.symbolUrl'),
-            get(HttpClient::class)
-        ),
+        ->constructor(get(HttpClient::class)),
+    BVBTickerValidator::class => create()->constructor(get(HttpClient::class)),
     TickerFactory::class => create()
-        ->constructor(get(BVBTickerRepository::class)),
+        ->constructor(get(BVBTickerRepository::class), get(BVBTickerValidator::class)),
 ];
