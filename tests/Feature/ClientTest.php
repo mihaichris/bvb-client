@@ -1,6 +1,7 @@
 <?php
 
 use BVB\Client;
+use BVB\Infrastructure\Ticker\BVBTicker;
 
 beforeEach(function () {
    $this->client = new Client(); 
