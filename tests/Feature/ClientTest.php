@@ -1,14 +1,9 @@
 <?php
 
-namespace BVB\Tests\Unit;
-
-use ArgumentCountError;
 use BVB\Client;
-use BVB\Domain\Ticker\TickerInfo;
-use BVB\Infrastructure\Ticker\BVBTicker;
 
 beforeEach(function () {
-    $this->client = new Client();
+   $this->client = new Client(); 
 });
 
 test('client is not null', function () {
@@ -59,11 +54,4 @@ test('get only ticker price', function (string $ticker) {
     $client = $this->client;
     $price = $client->getTickerPrice($ticker);
     $this->assertIsFloat($price);
-})->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');
-
-test('get only ticker info', function (string $ticker) {
-    /** @var Client $client */
-    $client = $this->client;
-    $info = $client->getTickerInfo($ticker);
-    $this->assertInstanceOf(TickerInfo::class, $info);
 })->with(['TRP', 'ALR', 'ONE', 'IMP'])->group('integration');

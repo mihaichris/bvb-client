@@ -39,8 +39,8 @@
 |
 */
 
-function http(string $method, string $url)
+function http(string $method, string $url, array $options = [])
 {
     $client = new \GuzzleHttp\Client();
-    return $client->request($method, $url);
+    return $client->request($method, $url, $options);
 }

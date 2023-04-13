@@ -32,9 +32,6 @@ $ticker = $client->getTicker('TRP');
 // Get ticker current stock price
 $price = $ticker->getPrice();
 
-// Get ticker info
-$info = $ticker->getInfo();
-
 ```
 
 # Contributing

@@ -2,12 +2,12 @@
 
 namespace BVB\Infrastructure\Ticker;
 
-use BVB\Domain\Ticker\TickerRepository;
-use BVB\Infrastructure\Http\Client\HttpClient;
 use Exception;
+use BVB\Domain\Ticker\TickerValidator;
+use BVB\Infrastructure\Http\Client\HttpClient;
 use Psr\Http\Client\ClientExceptionInterface;
 
-class BVBTickerRepository implements TickerRepository
+class BVBTickerValidator implements TickerValidator
 {
     public function __construct(private HttpClient $httpClient)
     {
@@ -17,10 +17,13 @@ class BVBTickerRepository implements TickerRepository
      * @throws Exception
      * @throws ClientExceptionInterface
      */
-    public function getLastClosed(string $ticker): float
+    public function exists(string $ticker): bool
     {
         $response = $this->httpClient->get("https://price.easybiny.com/price.php?sym={$ticker}");
         $content = json_decode((string)$response->getBody(), true);
-        return $content['RON'];
+        if ($content['RON'] === 'NA') {
+            return false;
+        }
+        return true;
     }
 }
